@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Message for Oli 💌</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #fcf8c1, #edb3ff);
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .envelope {
+      position: relative;
+      width: 720px;
+      height: 420px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+
+    /* Envelope pastel yellow */
+    .envelope-shape {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #fff6b3;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 55%;
+      background: #ffea95;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      transform-origin: top center;
+      z-index: 2;
+      animation: openFlap 1.5s ease forwards;
+    }
+
+    @keyframes openFlap {
+      0% { transform: rotateX(0); }
+      100% { transform: rotateX(-180deg); }
+    }
+
+    .card {
+      width: 700px;
+      height: 400px;
+      perspective: 2000px;
+      position: relative;
+      z-index: 3;
+      transform: translateY(100px);
+      opacity: 0;
+      animation: slideOut 2s ease forwards;
+      animation-delay: 1.6s;
+    }
+
+    @keyframes slideOut {
+      0% { transform: translateY(100px); opacity: 0; }
+      100% { transform: translateY(-40px); opacity: 1; }
+    }
+
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 1s ease-in-out;
+      position: relative;
+    }
+
+    /* Card front pastel purple */
+    .card-front {
+      width: 100%;
+      height: 100%;
+      background: #e6ccff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+      position: absolute;
+      top: 0;
+      left: 0;
+      backface-visibility: hidden;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .card-front img {
+      width: 280px; /* larger image */
+      margin-top: 18px;
+    }
+
+    /* Card back pastel purple */
+    .card-back {
+      width: 100%;
+      height: 100%;
+      background: #e6ccff;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #333;
+      padding: 50px 40px;
+      text-align: left;
+      overflow-y: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: rotateY(180deg);
+      backface-visibility: hidden;
+      box-sizing: border-box;
+    }
+
+    .card.open .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-back::-webkit-scrollbar { width: 8px; }
+    .card-back::-webkit-scrollbar-track { background: #f3dbff; border-radius: 10px; }
+    .card-back::-webkit-scrollbar-thumb { background: #c799ff; border-radius: 10px; }
+
+    .hint {
+      position: absolute;
+      bottom: -30px;
+      font-size: 0.9rem;
+      color: #444;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 3.2s;
+    }
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    #emojis-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      overflow: hidden;
+    }
+
+    .emoji {
+      position: absolute;
+      bottom: -48px;
+      font-size: var(--size, 28px);
+      animation: floatPath var(--dur, 5.5s) linear forwards;
+      will-change: transform, opacity;
+    }
+
+    .emoji .sprite {
+      display: inline-block;
+      line-height: 1;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.15));
+    }
+
+    .emoji.is-butterfly .sprite {
+      animation: flap 0.9s ease-in-out infinite;
+      transform-origin: 50% 60%;
+    }
+
+    @keyframes floatPath {
+      0%   { transform: translate(0, 0); opacity: 0; }
+      10%  { opacity: 1; }
+      35%  { transform: translate(calc(var(--xOffset, 40px) * 0.6), -35vh); }
+      65%  { transform: translate(calc(var(--xOffset, 40px) * 1.3), -75vh); }
+      100% { transform: translate(calc(var(--xOffset, 40px) * 2), -110vh); opacity: 0; }
+    }
+
+    @keyframes flap {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50%      { transform: rotate(10deg) scale(1.2); }
+    }
+  </style>
+</head>
+<body>
+  <div class="envelope">
+    <div class="envelope-shape"></div>
+    <div class="flap"></div>
+
+    <div class="card" id="card">
+      <div class="card-inner">
+        <!-- Front cover -->
+        <div class="card-front">
+          <img src=assets/kirbystitch.png>
+          <div class="hint">(click/ tap to open)</div>
+        </div>
+
+        <!-- Inside message -->
+        <div class="card-back">
+          <p>
+            Congrats, my MCL! I’m always proud of you, Oli.  
+            I just hope you see yourself the way I see you.  
+            Thank you for making me happy—maybe I can’t give back everything, but I really appreciate you, always.  
+            Also, thank you for always choosing to stay no matter how hard I can be to bear with, mb! Please don’t let the pressure or expectations weigh on you right now.  
+            Take this time to make it up to yourself (please, you deserve it!), to rest and be proud of what you’ve achieved just like how we are proud of you.  
+            I may not be very vocal or good with choosing the right words to express my feelings towards you, but I hope you feel it and you know it.  
+            I love you! 💛
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="emojis-container"></div>
+
+  <script>
+    const card = document.getElementById("card");
+    card.addEventListener("click", () => {
+      card.classList.toggle("open");
+    });
+
+    const container = document.getElementById("emojis-container");
+
+    function createFloatingEmoji() {
+      const wrapper = document.createElement("div");
+      wrapper.className = "emoji";
+
+      const sprite = document.createElement("span");
+      sprite.className = "sprite";
+
+      const options = ["💛", "💜", "🦋"];
+      const chosen = options[Math.floor(Math.random() * options.length)];
+      sprite.textContent = chosen;
+
+      if (chosen === "🦋") {
+        wrapper.classList.add("is-butterfly");
+      }
+
+      const startLeft = Math.random() * window.innerWidth;
+      const size = 20 + Math.random() * 26;
+      const duration = 3.8 + Math.random() * 3.4;
+      const xOffset = (Math.random() < 0.5 ? -1 : 1) * (28 + Math.random() * 60);
+
+      wrapper.style.left = startLeft + "px";
+      wrapper.style.setProperty("--size", size + "px");
+      wrapper.style.setProperty("--dur", duration + "s");
+      wrapper.style.setProperty("--xOffset", xOffset + "px");
+
+      wrapper.appendChild(sprite);
+      container.appendChild(wrapper);
+
+      setTimeout(() => wrapper.remove(), (duration + 0.3) * 1000);
+    }
+
+    const intervalId = setInterval(createFloatingEmoji, 600);
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        clearInterval(intervalId);
+      }
+    });
+  </script>
+</body>
+</html>
